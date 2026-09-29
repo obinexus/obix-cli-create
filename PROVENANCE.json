@@ -1,0 +1,91 @@
+{
+  "package": "obix-cli-create",
+  "dir": "cli/obix-cli-create",
+  "importedBy": "scripts/recovery/import-packages.mjs",
+  "snapshot": "snap-20260924T142414Z",
+  "stage": "stage-2 lift-and-shift (base owner; later stages repair/merge)",
+  "sources": [
+    {
+      "label": "upstream:obix-cli-create@ddf2f22",
+      "repo": "obix-cli-create",
+      "url": "https://github.com/obinexusmk2/obix-cli-create",
+      "sha": "ddf2f221c14b6333919c37d193a4bac6a31e4f46",
+      "path": ".",
+      "license": "MIT",
+      "licenseFileUpstream": false,
+      "filesImported": 19,
+      "filesExcluded": 7
+    }
+  ],
+  "originalManifest": {
+    "name": "@obinexusltd/obix-cli-create",
+    "version": "0.1.0",
+    "license": "MIT",
+    "bin": {
+      "obix-cli-create": "./dist/index.js"
+    },
+    "scripts": {
+      "build": "tsc",
+      "dev": "tsx src/index.ts",
+      "start": "node dist/index.js",
+      "prepublishOnly": "npm run build"
+    }
+  },
+  "transforms": [
+    "package.json regenerated (lockstep version, exact internal pins, exports with \"types\" first, standard scripts)",
+    "tsconfig.json generated (NodeNext via tsconfig.base.json; @types/node enabled)",
+    "internal specifiers renamed: none",
+    "relative imports given \".js\"/\"/index.js\" extensions: 0",
+    "LICENSE generated from the declared MIT license (upstream repo had no LICENSE file)"
+  ],
+  "localFixes": [
+    {
+      "stage": "stage-6",
+      "files": [
+        "src/index.ts",
+        "templates/node/_package.json",
+        "templates/html/index.html",
+        "templates/html/styles.css",
+        "test/scaffold.test.mjs",
+        "README.md"
+      ],
+      "why": "found by running the real bin and scanning the scaffold in Edge: --version was a constant 0.1.0; the node template depended on @obinexusltd/obix@^0.1.0 (does not exist, never imported); an unknown --template was not refused; the html template failed 6 contrast checks, distinguished an in-text link by colour only, had 36 px buttons against its own 48 px claim, linked a document it does not ship and caused a favicon 404. Fixed; 9 process tests + 4 Edge tests."
+    }
+  ],
+  "scopeScrub": {
+    "rule": "scripts/recovery/scrub-rules.mjs (brief: no other OBINexus projects)",
+    "replacementsPerFile": {
+      "README.md": 1
+    }
+  },
+  "authoredOverlay": [
+    "test/scaffold.test.mjs"
+  ],
+  "excluded": [
+    "dist/**",
+    "node_modules/**",
+    "lockfiles",
+    "tsconfig*.json (regenerated)",
+    ".gitignore",
+    ".github/**",
+    "coverage/**"
+  ],
+  "unresolvedRelativeImports": [],
+  "note": "scaffolder; templates/ kept; inquirer 9 ships no types, so @types/inquirer is a devDependency",
+  "renamedFrom": [
+    {
+      "name": "@obinexusltd/obix-cli-create",
+      "dir": "cli/obix-cli-create",
+      "stage": "unscoped-naming",
+      "why": "D-102 (2026-09-29): OBIX packages are named without an npm scope — previous name @obinexusltd/obix-cli-create, current name obix-cli-create (docs/recovery/unscoped-migration.md); the directory, version and exports are unchanged"
+    }
+  ],
+  "export": {
+    "from": "https://github.com/obinexusmk2/obix-monorepo",
+    "branch": "recovery/obix-api-preserving-rebuild",
+    "commit": "69cafc94910c1add865a520877617ac307668875",
+    "directory": "cli/obix-cli-create",
+    "exportedBy": "scripts/release/export-repos.mjs",
+    "note": "a clean initial commit of this package; the monorepo history is not imported (D-103). Local machine paths in this record are replaced by <local workspace>."
+  }
+}

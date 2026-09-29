@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="OBIX Heart UX — vanilla HTML/CSS/JS starter" />
+  <title>OBIX App</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Skip link (WCAG 2.4.1) ───────────────────────────────────────── -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ── App shell ────────────────────────────────────────────────────── -->
+  <header class="app-header" role="banner">
+    <div class="app-header__inner">
+      <span class="app-header__logo" aria-hidden="true">◈</span>
+      <h1 class="app-header__title">OBIX App</h1>
+      <span class="app-header__badge" id="violation-badge" hidden
+            role="status" aria-live="polite"></span>
+    </div>
+  </header>
+
+  <main id="main-content" class="app-main">
+
+    <!-- ── Stats row ──────────────────────────────────────────────────── -->
+    <section class="stats-row" aria-label="Summary">
+      <div class="stat-card">
+        <span class="stat-card__value" id="stat-total">0</span>
+        <span class="stat-card__label">Total</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__value" id="stat-open">0</span>
+        <span class="stat-card__label">Open</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__value" id="stat-done">0</span>
+        <span class="stat-card__label">Done</span>
+      </div>
+      <div class="stat-card stat-card--alert" id="stat-violations-card">
+        <span class="stat-card__value" id="stat-violations">0</span>
+        <span class="stat-card__label">#NoGhosting</span>
+      </div>
+    </section>
+
+    <!-- ── Add item form ──────────────────────────────────────────────── -->
+    <section class="panel" aria-labelledby="add-heading">
+      <h2 id="add-heading" class="panel__title">Add Item</h2>
+      <form id="add-form" class="add-form" novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label class="field__label" for="item-title">Title <span aria-hidden="true">*</span></label>
+            <input
+              id="item-title"
+              class="field__input"
+              type="text"
+              name="title"
+              placeholder="What needs doing?"
+              required
+              minlength="1"
+              aria-required="true"
+              autocomplete="off"
+            />
+          </div>
+          <div class="field field--narrow">
+            <label class="field__label" for="item-priority">Priority</label>
+            <select id="item-priority" class="field__select" name="priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+              <option value="critical">Critical</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field__label" for="item-desc">Description</label>
+          <input
+            id="item-desc"
+            class="field__input"
+            type="text"
+            name="description"
+            placeholder="Optional details…"
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-actions">
+          <button class="btn btn--primary" type="submit">Add Item</button>
+          <button class="btn btn--ghost"   type="reset">Clear</button>
+        </div>
+        <p class="field__error" id="add-form-error" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <!-- ── Violations panel (hidden until violations exist) ───────────── -->
+    <section class="panel panel--warn" id="violations-panel"
+             aria-labelledby="violations-heading" hidden>
+      <h2 id="violations-heading" class="panel__title">#NoGhosting Violations</h2>
+      <ul id="violations-list" class="violations-list" aria-live="polite"></ul>
+    </section>
+
+    <!-- ── Items list ─────────────────────────────────────────────────── -->
+    <section class="panel" aria-labelledby="items-heading">
+      <h2 id="items-heading" class="panel__title">Items</h2>
+
+      <!-- Filter toolbar -->
+      <div class="toolbar" role="group" aria-label="Filter items">
+        <button class="toolbar__btn toolbar__btn--active" data-filter="all"   aria-pressed="true">All</button>
+        <button class="toolbar__btn" data-filter="open"                        aria-pressed="false">Open</button>
+        <button class="toolbar__btn" data-filter="in_progress"                 aria-pressed="false">In Progress</button>
+        <button class="toolbar__btn" data-filter="completed"                   aria-pressed="false">Done</button>
+      </div>
+
+      <ul id="items-list" class="items-list" aria-live="polite" aria-label="Items">
+        <li class="items-list__empty">No items yet — add one above.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="app-footer" role="contentinfo">
+    <p>
+      Built with <strong>OBIX Heart UX</strong> —
+      <a href="https://github.com/obinexusmk2/obix/tree/main/docs" target="_blank"
+         rel="noopener noreferrer">Read the docs ↗</a>
+    </p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
