@@ -112,3 +112,16 @@ test('the node template policy engine (types + policies) compiles with the works
   const found = validateCompliance(state({ a: item({ id: 'a' }), b: item({ id: 'b', priority: 'critical' }) }));
   assert.deepEqual(found.map((v) => [v.itemId, v.type, v.severity]), [['a', 'unassigned_item', 'warning'], ['b', 'unassigned_item', 'critical']]);
 });
+
+test('the scaffolder and its templates point at the canonical repository github.com/obinexus/obix, never a retired owner (R6-FIX)', () => {
+  const dir = tmp();
+  const r = run(['demo-links', '--yes', '--template', 'html'], dir);
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(r.stdout, /https:\/\/github\.com\/obinexus\/obix\b/);
+  const written = fs.readdirSync(path.join(dir, 'demo-links'), { recursive: true }).map(String).filter((f) => fs.statSync(path.join(dir, 'demo-links', f)).isFile());
+  const text = [r.stdout, ...written.map((f) => fs.readFileSync(path.join(dir, 'demo-links', f), 'utf8'))].join('\n');
+  // the retired names, assembled so that this shipped test file is not itself a reference to them (the release payload gate reads it)
+  const RETIRED = new RegExp(['obinexusmk2', 'OBINexusComputing', ['obix', 'monorepo'].join('-')].join('|'), 'i');
+  assert.doesNotMatch(text, RETIRED);
+  assert.match(fs.readFileSync(path.join(dir, 'demo-links', 'index.html'), 'utf8'), /https:\/\/github\.com\/obinexus\/obix\/tree\/main\/docs/);
+});

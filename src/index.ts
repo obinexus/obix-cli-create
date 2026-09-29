@@ -207,7 +207,7 @@ function printNextSteps(opts: ScaffoldOptions): void {
   console.log();
   console.log(
     chalk.dim('  Template docs → ') +
-    chalk.hex('#6c63ff')('https://github.com/obinexusmk2/obix'),
+    chalk.hex('#6c63ff')('https://github.com/obinexus/obix'),
   );
   console.log();
 }
